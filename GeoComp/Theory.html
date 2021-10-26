@@ -4,7 +4,15 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Golfzier</title>
-	<link rel="stylesheet" href="app.css" type="text/css" />
+	<link rel="stylesheet" href="./styles/base.css" type="text/css" />
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script>
+		MathJax = {
+			tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
+			svg: {fontCache: 'global'}
+		};
+	</script>
+	<script id="MathJax-script" src="scripts/MathJax3-svg.min.js"></script>
 </head>
 <body>
 
@@ -18,7 +26,29 @@
 		<div class="content">
 			<h1>Golfzier</h1>
 			<h2>Teoria</h2>
+			<h3>Superfici di Bezier</h3>
+			<p>
+				Le superfici di Bezier sono belle.
+				$$ P(u,v) = \sum_{i=0}^{n}\sum_{j=0}^{m}B_i^n(u)B_j^m(v)p_{i,j} $$
+				Anzi direi molto belle.
+			</p>
+			<h4>Algoritmo di Casteljau</h4>
+			<p>
+				L'algoritmo di Casteljau per fare le superfici di Bezier è bello.
+			</p>
+			<h4>Polinomi di Bernstein</h4>
+			<p>
+				Un polinomio $ B_i^n(u) $ di Bernstein è bello.
+			</p>
+			<h3>Superfici B-splines</h3>
+			<p>
+				Gli incollamenti sono belli.
+			</p>
 
+			<h3>Scelte implementative</h3>
+			<h4>Terreno</h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<h4>Incollamenti</h4>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 		</div>

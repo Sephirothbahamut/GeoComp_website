@@ -37,9 +37,18 @@ h2 {
 
 h3 {
 	color: var(--highlight);
-	font-weight: bold;
+	font-weight: bolder;
+	font-size: 18px;
 	padding: 8px 16px 2px 16px;
 	margin: 4px 16px 4px 16px;
+}
+
+h4 {
+	color: var(--highlight);
+	font-weight: bold;
+	font-style: italic;
+	padding: 8px 16px 2px 16px;
+	margin: 4px 24px 4px 24px;
 }
 
 .container {
