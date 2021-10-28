@@ -69,7 +69,9 @@
     <TypeScriptSourceRoot />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="scripts\header.js" />
     <Content Include="scripts\MathJax3-svg.min.js" />
+    <Content Include="scripts\highlight\es\package.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -83,6 +85,12 @@
     <Content Include="Images\CP_types.png" />
     <Content Include="index.html" />
     <Content Include="Manual.html" />
+    <Content Include="scripts\highlight\es\core.min.js" />
+    <Content Include="scripts\highlight\es\languages\csharp.min.js" />
+    <Content Include="scripts\highlight\highlight.min.js" />
+    <Content Include="scripts\highlight\languages\csharp.min.js" />
+    <Content Include="styles\highlight\vs.min.css" />
+    <Content Include="styles\highlight\vs2015.min.css" />
     <Content Include="styles\base.css" />
     <Content Include="styles\dark.css" />
     <Content Include="styles\light.css" />

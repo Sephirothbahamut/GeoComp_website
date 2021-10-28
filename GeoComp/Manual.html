@@ -3,26 +3,20 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Golfzier</title>
-	<link rel="stylesheet" href="app.css" type="text/css" />
+	<script src="scripts/header.js"></script>
 </head>
 <body>
+	<div class="tabs" id="tabs"></div>
 
-	<div class="tabs">
-		<a class="tablink"         style="width:25%" href="index.html">Home</a>
-		<a class="tablink"         style="width:25%" href="">Applet</a>
-		<a class="tablink"         style="width:25%" href="Theory.html">Teoria</a>
-		<a class="tablink current" style="width:25%" href="Manual.html">Manuale</a>
-	</div>
 	<div class="container">
 		<div class="content">
 			<h1>Golfzier</h1>
 
 			<h2>Scopo del gioco</h2>
 			<p>
-				Lo scopo del gioco è mandare la pallina da golf in buca; tuttavia la pallina non viene lanciata, ma il giocatore dovrà guidarla alla buca modificando il terreno di gioco.<br/>
-				Per modificare il terreno sarà necessario manipolare dei punti di controllo; tale operazione ha un costo in punteggio pari alla lunghezza dello spostamento effettuato. 
-				Il punteggio disponibile è diverso per ogni livello, ed è visibile in alto a sinistra. È possibile tuttavia andare in punteggio negativo e recuperare i punti lungo la strada raccogliendo delle monete.<br/>
+				Lo scopo del gioco è mandare la pallina da golf in buca; tuttavia la pallina non viene lanciata, ma il giocatore dovrà guidarla alla buca modificando il terreno di gioco.<br />
+				Per modificare il terreno sarà necessario manipolare dei punti di controllo; tale operazione ha un costo in punteggio pari alla lunghezza dello spostamento effettuato.
+				Il punteggio disponibile è diverso per ogni livello, ed è visibile in alto a sinistra. È possibile tuttavia andare in punteggio negativo e recuperare i punti lungo la strada raccogliendo delle monete.<br />
 				Un livello è superato quando la pallina entra in buca ed il punteggio rimanente è >= 0.
 			</p>
 
@@ -46,7 +40,7 @@
 
 			<h2>Terreno</h2>
 			<p>
-				Il terreno è composto da una o più tiles adiacenti; ogni tile è una superfice di Bezier di grado 4. Ogni tile possiede 5x5 punti di controllo, ed i punti di confine sono condivisi con le tiles adiacenti.<br/>
+				Il terreno è composto da una o più tiles adiacenti; ogni tile è una superfice di Bezier di grado 4. Ogni tile possiede 5x5 punti di controllo, ed i punti di confine sono condivisi con le tiles adiacenti.<br />
 				Per garantire la continuità del terreno, sono forzate delle regole di incollamento sui punti vicini al confine di ogni tile.
 			</p>
 
@@ -83,14 +77,14 @@
 			<img class="centered" src="Images/CP_glued.png" />
 			<h3>Condivisi ed incollati</h3>
 			<p>
-				I punti di controllo identificati in giallo sono sia condivisi che incollati. Questo avviene in ogni area dove 4 tiles diverse hanno un vertice in comune. 
+				I punti di controllo identificati in giallo sono sia condivisi che incollati. Questo avviene in ogni area dove 4 tiles diverse hanno un vertice in comune.
 				Quel vertice sarà un punto condiviso, e tutti i 4 vertici a lui adiacenti saranno sia condivissi tra due diverse tiles, che incollati attraverso il punto condiviso dalle 4 tiles.
 				Muoverli causa un unione dei comportamenti dei punti condivisi e di quelli incollati.
 			</p>
 
 			<h2>Monete</h2>
 			<p>
-				In alcuni livelli sono presenti delle monete. Le monete saranno raccolte quando la pallina si avvicina ad esse, ed ogni moneta aggiunge 5 punti. Per questo motivo è possibile andare in negativo durante la fase di manipolazione del terreno, 
+				In alcuni livelli sono presenti delle monete. Le monete saranno raccolte quando la pallina si avvicina ad esse, ed ogni moneta aggiunge 5 punti. Per questo motivo è possibile andare in negativo durante la fase di manipolazione del terreno,
 				ed il livello può essere vinto se il punteggio torna in positivo grazie alle monete raccolte.
 			</p>
 			<h2>Piattaforme</h2>
