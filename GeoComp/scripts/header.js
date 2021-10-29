@@ -41,7 +41,7 @@ function spawn_tab(label, address)
 	tmp.setAttribute("href", destination);
 	tmp.innerHTML = label;
 	tmp.classList.add("tablink");
-	tmp.style.width = "25%";
+	tmp.style.width = "22%";
 	//TODO if destination == current location, add "current" too
 	return tmp;
 }
@@ -49,15 +49,16 @@ function spawn_tab(label, address)
 window.onload = () =>
 {
 	let tabs = document.getElementById("tabs");
-	tabs.appendChild(spawn_tab("Home",    "index"));
-	tabs.appendChild(spawn_tab("Applet",  "index"));
-	tabs.appendChild(spawn_tab("Teoria",  "Theory"));
-	tabs.appendChild(spawn_tab("Manuale", "Manual"));
+	tabs.appendChild(spawn_tab("🏠&#xFE0E; Home",    "index"));
+	tabs.appendChild(spawn_tab("🎮&#xFE0E; Applet",  "index"));
+	tabs.appendChild(spawn_tab("🏫&#xFE0E; Teoria",  "Theory"));
+	tabs.appendChild(spawn_tab("🕮&#xFE0E; Manuale", "Manual"));
 
 	let theme_tab = document.createElement("a");
 	theme_tab.setAttribute("href", dark_theme ? "?" : "?dark");
-	theme_tab.innerHTML = "Cambia Tema";
+	theme_tab.innerHTML = "⬤&#xFE0E; Cambia Tema";
 	theme_tab.classList.add("tablink");
+	theme_tab.style.width = "12%";
 
 	tabs.appendChild(theme_tab);
 };
