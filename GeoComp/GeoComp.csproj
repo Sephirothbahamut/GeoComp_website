@@ -79,7 +79,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app.css" />
     <Content Include="Images\CP_anatomy.png" />
     <Content Include="Images\CP_types.png" />
     <Content Include="index.html" />
