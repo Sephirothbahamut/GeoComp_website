@@ -18,7 +18,7 @@ a, u {
 
 h1 {
 	text-align: center;
-	font-size: 36px;
+	font-size: 42px;
 	color: var(--highlight);
 	border-bottom: 2px solid var(--secondary_foreground);
 	padding: 8px 16px 4px 16px;
@@ -63,7 +63,7 @@ h4 {
 
 p {
 	padding: 4px 7px 2px 4px;
-	margin: 4px 7px 2px 4px;
+	margin: 4px 48px 2px 48px;
 }
 
 ul {
@@ -75,6 +75,12 @@ img.centered {
 	margin-left: auto;
 	margin-right: auto;
 	width: 50%
+}
+
+img.logo {
+	width: 128px;
+	height: 64px;
+	filter: invert(var(--invert));
 }
 
 /* ==================================================================================================== TABS BEG*/

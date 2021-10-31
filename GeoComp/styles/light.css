@@ -6,4 +6,5 @@
 	--highlight:            rgb(  0,  50,  80);
 	--foreground:           rgb(  0,   0,   0);
 	--secondary_foreground: rgb(100, 100, 120);
+	--invert: 0;
 }

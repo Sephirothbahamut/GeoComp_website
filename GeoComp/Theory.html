@@ -4,31 +4,45 @@
 <head>
 	<meta charset="utf-8" />
 	<script src="scripts/header.js"></script>
+	<script type="text/x-mathjax-config">
+		MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+	</script>
+	<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 </head>
 <body>
 	<div class="tabs" id="tabs"></div>
 
 	<div class="container">
 		<div class="content">
-			<h1>Golfzier</h1>
+			<h1><img class="centered logo" src="Images/Logo.png" />Golfzier</h1>
 			<h2>Teoria</h2>
 			<h3>Superfici di Bezier</h3>
 			<p>
-				Le superfici di Bezier sono belle.
-				$$ P(u,v) = \sum_{i=0}^{n}\sum_{j=0}^{m}B_i^n(u)B_j^m(v)p_{i,j} $$
-				Anzi direi molto belle.
+				Le superfici di Bezier sono l'estensione naturale a tre dimensioni delle curve di Bezier: fin da quando sono state definite dall'omonimo 
+				ingegnere francese, sono state utilizzate estensivamente per la modellazione di superfici in ambito di design e in seguito sono state 
+				ampiamente adottate in computer grafica e nel CAD in quanto sono intuitive e semplici da rappresentare.
+			</p>
+			<p>
+				Le superfici di Bezier sono costruite a partire da un insieme di punti $p_{i,j}$ detto poliedro di controllo,
+				il quale stabilisce il bigrado $ (n,m) $ della superficie stessa.
+			</p>
+			<p>
+				Ci sono due modi per costruire una superficie di Bezier: tramite algoritmo di Casteljau o tramite algoritmo dei polinomi di Bernstein.
 			</p>
 			<h4>Algoritmo di Casteljau</h4>
 			<p>
-				L'algoritmo di Casteljau per fare le superfici di Bezier è bello.
+				L'algoritmo di Casteljau per fare le superfici di Bezier è bello. TODO
+				Due modi quando h diverso da k
+				- Innalza il grado "spezzando" un punto in due punti
+				- Quando una delle due è esaurita procedi semplicemente lungo i segmenti anzichè lungo i quadrati
 			</p>
-			<h4>Polinomi di Bernstein</h4>
+			<h4>Algoritmo dei polinomi di Bernstein</h4>
 			<p>
-				Un polinomio $ B_i^n(u) $ di Bernstein è bello.
+				L'algoritmo dei polinomi di Bernstein $ B_i^n(u) $ è bello. TODO
 			</p>
 			<h3>Superfici B-splines</h3>
 			<p>
-				Gli incollamenti sono belli.
+				Gli incollamenti sono belli. TODO
 			</p>
 
 			<h3>Scelte implementative</h3>
@@ -37,8 +51,8 @@
 			<h4>Incollamenti</h4>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		
-				<h2>Code</h2>
+
+			<h2>Code</h2>
 			<pre><code>
 public class Main()
 	{

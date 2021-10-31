@@ -1,15 +1,18 @@
 ﻿
+// Title and favicon
 document.write('<title>Golfzier</title>');
+document.head.appendChild(Object.assign(document.createElement("link"), { rel: "icon", href: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛳</text></svg>" }))
 
 // Setup latex stuff
-document.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>');
+//document.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>');
 
-MathJax = {
+/* ---- MATHJAX3 CONFIG ----
+ * MathJax = {
 	tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
 	svg: { fontCache: 'global' }
 };
 
-document.write('<script id="MathJax-script" src="scripts/MathJax3-svg.min.js"></script>')
+document.write('<script id="MathJax-script" src="scripts/MathJax3-svg.min.js"></script>')*/
 
 // Imports colors for our theme, and different highlightjs themes
 const dark_theme = window.location.search.indexOf('?dark') === 0;
