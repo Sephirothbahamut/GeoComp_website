@@ -70,7 +70,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="scripts\header.js" />
-    <Content Include="scripts\MathJax3-svg.min.js" />
     <Content Include="scripts\highlight\es\package.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
