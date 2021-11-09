@@ -70,6 +70,10 @@ ul {
 	margin-left: 80px;
 }
 
+ul.math > li {
+	line-height: 30px;
+}
+
 img.centered {
 	display: block;
 	margin-left: auto;
