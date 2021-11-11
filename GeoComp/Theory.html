@@ -32,7 +32,7 @@
 				$$ P(u,v) = \sum_{\substack{i=0...h \\ j=0...k}}f_{i,j}(u,v)P_{i,j} $$
 				dove:
 				<ul class="math">
-					<li>$P_{i,j}$ sono i punti $P_{0,0},...,P_{h,k} \in \mathbb{E}^3$ del poliedro di controllo di bigrado $ (h,k) $ e dimensioni $(h+1) \cdot (k+1)$, con $h \ge 1, k \ge 1$</li>
+					<li>$P_{i,j}$ sono i punti $P_{0,0},...,P_{h,k} \in \mathbb{E}^3$ del poliedro di controllo di bigrado $ (h,k) $ e dimensioni $(h+1) \cdot (k+1)$, con $h \ge 1, k \ge 1$ e $0 \le i \le h - 1, 0 \le j \le k - 1 $</li>
 					<li>La coppia di valori $(u,v)$ sono coordinate parametriche appartenenti al quadrato unitario $[0,1]\times[0,1]$</li>
 					<li>$f_{i,j}(u,v)$ sono polinomi opportunamente scelti</li>
 				</ul>
@@ -61,10 +61,39 @@
 
 			<h4>Algoritmo di Casteljau</h4>
 			<p>
-				L'algoritmo di Casteljau per fare le superfici di Bezier è bello. TODO
-				Due modi quando h diverso da k
-				- Innalza il grado "spezzando" un punto in due punti
-				- Quando una delle due è esaurita procedi semplicemente lungo i segmenti anzichè lungo i quadrati
+				L'algoritmo di Casteljau, estensione del medesimo algoritmo applicato sulle curve, rappresenta un metodo ricorsivo più "geometrico"
+				per stabilire tutti i punti di una superficie di Bezier.
+			</p>
+			<p>
+				Come nel precedente metodo, prendiamo in considerazione il quadrato unitario $[0,1]\times[0,1]$ come dominio di definizione.
+				Fissiamo gli $(h+1) \cdot (k+1)$ punti del poliedro di controllo $\langle P_{0,0},...,P_{h,k}\rangle$ e una coppia di valori
+				$(u,v) \in [0,1]\times[0,1]$.
+			</p>
+			<p>
+				Consideriamo ora i punti del poliedro disposti su una griglia combinatoria, la quale dividerà il poliedro in
+				$h \cdot k$ quadrilateri, ognuno avente come vertici i punti $\langle P_{i, j}, P_{i+1, j}, P_{i, j+1}, P_{i+1, j+1} \rangle$,
+				con $0 \le i \le (h - 1), 0 \le j \le (k - 1) $.
+			</p>
+			<p>
+				Per ognuno di questi quadrilateri $q_{i,j}$ vogliamo determinare un nuovo punto $P^1_{i,j}$:
+				per farlo otteniamo prima sui segmenti $\overline{r_i} = \overline{P_{i,j},P_{i,j+1}},\  \overline{r_{i+1}} = \overline{P_{i+1,j},P_{i+1,j+1}}$ del quadrilatero due punti $A_i,\ A_{i+1}$ tale per cui sia verificata le seguenti identità fra rapporti semplici
+				$$ (0, u, 1) = (P_{i,j}, A_i, P_{i,j+1}) = (P_{i+1,j}, A_{i+1}, P_{i+1,j+1})$$
+			</p>
+			<p>
+				A questo punto, sul segmento $\overline{A_i,A_{i+1}}$ determiniamo $P^1_{i,j}$ in modo che verifichi la seguente identità fra rapporti semplici:
+				$$ (0, v, 1) = (A_i, P^1_{i,j}, A_{i+1}) $$
+
+				Una volta considerato ogni quadrilatero, avremo ottenuto $h \cdot k$ nuovi punti: a loro volta essi descriveranno un nuovo
+				poliedro di controllo (detto di 1° livello) a cui potremo riapplicare il procedimento appena spiegato, da cui otterremo
+				$(h-1) \cdot (k-1)$ nuovi punti che formeranno il poliedro di 2° livello e così via.
+			</p>
+			<p>
+				La ricorsione termina quando ottengo un solo punto $P^{f}_{0, 0}$, dove $f = max(h,k)$. <br />
+				Questo non è altro che il punto della superficie di Bezier corrispondente alla coppia di valori $(u,v)$
+				che avevamo fissato sul quadrato unitario.
+			</p>
+			<p>
+				Ripetendo questo processo per ogni coppia $(u,v) \in [0,1]\times[0,1]$, otterremo la superficie di Bezier completa.
 			</p>
 			<h3>Superfici B-splines</h3>
 			<p>
