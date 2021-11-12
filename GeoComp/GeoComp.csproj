@@ -69,8 +69,23 @@
     <TypeScriptSourceRoot />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="applet\Build\Exports.framework.js" />
+    <Content Include="applet\Build\Exports.loader.js" />
+    <Content Include="applet\applet.html" />
+    <Content Include="applet\TemplateData\favicon.ico" />
+    <Content Include="applet\TemplateData\fullscreen-button.png" />
+    <Content Include="applet\TemplateData\progress-bar-empty-dark.png" />
+    <Content Include="applet\TemplateData\progress-bar-empty-light.png" />
+    <Content Include="applet\TemplateData\progress-bar-full-dark.png" />
+    <Content Include="applet\TemplateData\progress-bar-full-light.png" />
+    <Content Include="applet\TemplateData\style.css" />
+    <Content Include="applet\TemplateData\unity-logo-dark.png" />
+    <Content Include="applet\TemplateData\unity-logo-light.png" />
+    <Content Include="applet\TemplateData\webgl-logo.png" />
     <Content Include="scripts\header.js" />
     <Content Include="scripts\highlight\es\package.json" />
+    <Content Include="applet\Build\Exports.data" />
+    <Content Include="applet\Build\Exports.wasm" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

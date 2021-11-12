@@ -53,7 +53,7 @@ window.onload = () =>
 {
 	let tabs = document.getElementById("tabs");
 	tabs.appendChild(spawn_tab("🏠&#xFE0E; Home",    "index"));
-	tabs.appendChild(spawn_tab("🎮&#xFE0E; Applet",  "index"));
+	tabs.appendChild(spawn_tab("🎮&#xFE0E; Applet",  "applet/applet"));
 	tabs.appendChild(spawn_tab("🏫&#xFE0E; Teoria",  "Theory"));
 	tabs.appendChild(spawn_tab("🕮&#xFE0E; Manuale", "Manual"));
 
