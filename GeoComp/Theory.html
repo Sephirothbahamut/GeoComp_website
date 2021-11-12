@@ -95,9 +95,35 @@
 			<p>
 				Ripetendo questo processo per ogni coppia $(u,v) \in [0,1]\times[0,1]$, otterremo la superficie di Bezier completa.
 			</p>
-			<h3>Superfici B-splines</h3>
+			<h3>Incollamento di più superfici</h3>
 			<p>
-				Gli incollamenti sono belli. TODO
+				Le superfici di Bezier crescono di complessità quanto più è alto il bigrado del poliedro di controllo, ovvero il numero
+				di punti di controllo in esso contenuti, facendo quindi anche crescere la complessità computazionale dei calcoli necessari
+				per trovare tutti i punti della superficie (basti pensare che il grado dei polinomi di Bernstein dipende dal bigrado del poliedro).
+			</p>
+			<p>
+				Inoltre le superfici di Bezier non hanno alcuna possibilità di avere controllo locale: qualsiasi modifica ai punti di controllo
+				modificherebbe l'intera superficie risultante, potenzialmente in modo drastico, richiedendo quindi l'intera ri-computazione di essa.
+			</p>
+			<p>
+				Per questo motivo l'approccio più opportuno quando si deve lavorare con superfici molto estese è utilizzare superfici di bigrado minore,
+				generalmente bicubiche o simili, e "incollarle" fra di loro creando una patch, dando appunto l'illusione di lavorare con una superficie
+				complessa ma eliminando i problemi citati pocanzi.
+			</p>
+			<h4>Condizioni di incollamento</h4>
+			<p>
+				Al fine di ottenere una parvenza di continuità in una patch di superfici è necessario porre alcuni vincoli sugli estremi delle superfici da incollare:
+				<ul class="math">
+					<li>Continuità $C^0$: le superfici devono condividere lo stesso bordo, pertanto la stessa curva, in prossimità dell'incollamento</li>
+					<li>Continuità $C^1$: lungo tutti i punti della curva su cui avviene l'incollamento il piano tangente e il versore normale sono gli stessi sia che essi vengano considerati sulla prima o sulla seconda superficie</li>
+				</ul>
+			</p>
+			<p>
+				Fortunatamente, i punti dei poliedri di controllo delle superfici da incollare ci aiutano a stabilire in modo semplice se queste condizioni sono verificate
+				<ul class="math">
+					<li>La condizione $C^0$ è banalmente soddisfatta quando i punti di controllo al bordo da incollare di entrambe le superfici coincidono</li>
+					<li>Per la condizione $C^1$ è necessario osservare anche i punti di controllo appena adiacenti a quelli sul bordo da incollare: essi devono essere allineati e soddisfare lo stesso rapporto semplice che hanno sul piano $uv$</li>
+				</ul>
 			</p>
 
 			<h3>Scelte implementative</h3>

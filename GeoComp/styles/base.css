@@ -68,7 +68,7 @@ p {
 }
 
 ul {
-	margin-left: 80px;
+	margin: 4px 48px 2px 80px;
 }
 
 ul.math > li {
