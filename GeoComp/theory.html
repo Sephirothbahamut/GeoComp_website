@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<script src="scripts/header.js"></script>
+</head>
+<body>
+	<div class="tabs" id="tabs"></div>
+
+	<div class="container">
+		<div class="content">
+			<h1><img class="centered logo gamelogo" src="Images/Logo.png" />Golfzier</h1>
+			<h2>Teoria</h2>
+			<h3>Superfici di B&eacute;zier</h3>
+			<p>
+				Le superfici di B&eacute;zier sono l'estensione naturale a tre dimensioni delle curve di B&eacute;zier: fin da quando sono state definite dall'omonimo
+				ingegnere francese, sono state utilizzate estensivamente per la modellazione di superfici in ambito di design e in seguito sono state
+				ampiamente adottate in computer grafica e nel CAD in quanto sono intuitive e semplici da rappresentare.
+			</p>
+			<p>
+				Ogni superficie di B&eacute;zier è costruita a partire da un insieme finito di punti $ p_{i,j} $ detto poliedro di controllo,
+				il quale stabilisce l'andamento del supporto della superficie.
+				<!--TODO inserisci immagine carina-->
+			</p>
+			<p>
+				Ci sono due modi per identificare una superficie di B&eacute;zier: tramite algoritmo dei polinomi di Bernstein o tramite algoritmo di Casteljau.
+			</p>
+			<h4>Algoritmo dei polinomi di Bernstein</h4>
+			<p>
+				Vogliamo definire la nostra superficie di B&eacute;zier come combinazione lineare dei punti del poliedro di controllo, pertanto nella forma
+				$$ P(u,v) = \sum_{\substack{i=0...h \\ j=0...k}}f_{i,j}(u,v)P_{i,j} $$
+				dove:
+				<ul class="math">
+					<li>$P_{i,j}$ sono i punti $P_{0,0},...,P_{h,k} \in \mathbb{E}^3$ del poliedro di controllo di bigrado $ (h,k) $ e dimensioni $(h+1) \cdot (k+1)$, con $h \ge 1, k \ge 1$ e $0 \le i \le h - 1, 0 \le j \le k - 1 $</li>
+					<li>La coppia di valori $(u,v)$ sono coordinate parametriche appartenenti al quadrato unitario $[0,1]\times[0,1]$</li>
+					<li>$f_{i,j}(u,v)$ sono polinomi opportunamente scelti</li>
+				</ul>
+			</p>
+			<p>
+				osserviamo che $P(u,v)$ è una funzione che mappa ogni punto del quadrato unitario nel sistema di riferimento in cui vivono i punti di controllo, ovvero
+				$$ P(u,v) : [0,1]\times[0,1] \rightarrow \mathbb{E}^3 $$
+			</p>
+			<p>
+				Le funzioni polinomiali considerate in questo caso sono i polinomi di Bernstein definiti in modo generico come:
+				$$ B_i^n(u) = \binom{n}{i} u^i(1-u)^{n-i} $$
+				dove
+				$$ \binom{n}{i} = \frac{n!}{i!(n-i)!}$$
+				è il coefficiente binomiale.
+			</p>
+			<p>
+				Possiamo quindi riscrivere la precedente equazione per la superficie di B&eacute;zier come:
+				$$
+				\begin{align}
+				P(u,v) & = \sum_{i=0}^h B_i^h(u)\sum_{j=0}^k B_j^k(v)P_{i,j} \\
+				& = \sum_{i=0}^h \sum_{j=0}^k B_i^h(u)B_j^k(v)P_{i,j}
+				\end{align}
+				$$
+
+			</p>
+
+			<h4>Algoritmo di Casteljau</h4>
+			<p>
+				L'algoritmo di Casteljau, estensione del medesimo algoritmo applicato sulle curve, rappresenta un metodo ricorsivo più "geometrico"
+				per stabilire tutti i punti di una superficie di B&eacute;zier.
+			</p>
+			<p>
+				Come nel precedente metodo, prendiamo in considerazione il quadrato unitario $[0,1]\times[0,1]$ come dominio di definizione.
+				Fissiamo gli $(h+1) \cdot (k+1)$ punti del poliedro di controllo $\langle P_{0,0},...,P_{h,k}\rangle$ e una coppia di valori
+				$(u,v) \in [0,1]\times[0,1]$.
+			</p>
+			<p>
+				Consideriamo ora i punti del poliedro disposti su una griglia combinatoria, la quale dividerà il poliedro in
+				$h \cdot k$ quadrilateri, ognuno avente come vertici i punti $\langle P_{i, j}, P_{i+1, j}, P_{i, j+1}, P_{i+1, j+1} \rangle$,
+				con $0 \le i \le (h - 1), 0 \le j \le (k - 1) $.
+			</p>
+			<p>
+				Per ognuno di questi quadrilateri $q_{i,j}$ vogliamo determinare un nuovo punto $P^1_{i,j}$:
+				per farlo otteniamo prima sui segmenti $\overline{r_i} = \overline{P_{i,j},P_{i,j+1}},\  \overline{r_{i+1}} = \overline{P_{i+1,j},P_{i+1,j+1}}$ del quadrilatero due punti $A_i,\ A_{i+1}$ tale per cui sia verificata le seguenti identità fra rapporti semplici
+				$$ (0, u, 1) = (P_{i,j}, A_i, P_{i,j+1}) = (P_{i+1,j}, A_{i+1}, P_{i+1,j+1})$$
+			</p>
+			<p>
+				A questo punto, sul segmento $\overline{A_i,A_{i+1}}$ determiniamo $P^1_{i,j}$ in modo che verifichi la seguente identità fra rapporti semplici:
+				$$ (0, v, 1) = (A_i, P^1_{i,j}, A_{i+1}) $$
+
+				Una volta considerato ogni quadrilatero, avremo ottenuto $h \cdot k$ nuovi punti: a loro volta essi descriveranno un nuovo
+				poliedro di controllo (detto di 1° livello) a cui potremo riapplicare il procedimento appena spiegato, da cui otterremo
+				$(h-1) \cdot (k-1)$ nuovi punti che formeranno il poliedro di 2° livello e così via.
+			</p>
+			<p>
+				La ricorsione termina quando ottengo un solo punto $P^{f}_{0, 0}$, dove $f = max(h,k)$. <br />
+				Questo non è altro che il punto della superficie di B&eacute;zier corrispondente alla coppia di valori $(u,v)$
+				che avevamo fissato sul quadrato unitario.
+			</p>
+			<p>
+				Ripetendo questo processo per ogni coppia $(u,v) \in [0,1]\times[0,1]$, otterremo la superficie di B&eacute;zier completa.
+			</p>
+			<h3>Incollamento di più superfici</h3>
+			<p>
+				Le superfici di B&eacute;zier crescono di complessità quanto più è alto il bigrado del poliedro di controllo, ovvero il numero
+				di punti di controllo in esso contenuti, facendo quindi anche crescere la complessità computazionale dei calcoli necessari
+				per trovare tutti i punti della superficie (basti pensare che il grado dei polinomi di Bernstein dipende dal bigrado del poliedro).
+			</p>
+			<p>
+				Inoltre le superfici di B&eacute;zier non hanno alcuna possibilità di avere controllo locale: qualsiasi modifica ai punti di controllo
+				modificherebbe l'intera superficie risultante, potenzialmente in modo drastico, richiedendo quindi l'intera ri-computazione di essa.
+			</p>
+			<p>
+				Per questo motivo l'approccio più opportuno quando si deve lavorare con superfici molto estese è utilizzare superfici di bigrado minore,
+				generalmente bicubiche o simili, e "incollarle" fra di loro creando una patch, dando appunto l'illusione di lavorare con una superficie
+				complessa ma eliminando i problemi citati pocanzi.
+			</p>
+			<h4>Condizioni di incollamento</h4>
+			<p>
+				Al fine di ottenere una parvenza di continuità in una patch di superfici è necessario porre alcuni vincoli sugli estremi delle superfici da incollare:
+				<ul class="math">
+					<li>Continuità $C^0$: le superfici devono condividere lo stesso bordo, pertanto la stessa curva, in prossimità dell'incollamento</li>
+					<li>Continuità $C^1$: lungo tutti i punti della curva su cui avviene l'incollamento il piano tangente e il versore normale sono gli stessi sia che essi vengano considerati sulla prima o sulla seconda superficie</li>
+				</ul>
+			</p>
+			<p>
+				Fortunatamente, i punti dei poliedri di controllo delle superfici da incollare ci aiutano a stabilire in modo semplice se queste condizioni sono verificate
+				<ul class="math">
+					<li>La condizione $C^0$ è banalmente soddisfatta quando i punti di controllo al bordo da incollare di entrambe le superfici coincidono</li>
+					<li>Per la condizione $C^1$ è necessario osservare anche i punti di controllo appena adiacenti a quelli sul bordo da incollare: essi devono essere allineati e soddisfare lo stesso rapporto semplice che hanno sul piano $uv$</li>
+				</ul>
+			</p>
+
+			<h2>Code</h2>
+			<h3>Terreno</h3>
+			<p>
+				Come detto prima, il terreno è composto da una serie di superfici di Bezier. Nel gioco compaiono solo superfici di 4° grado, tuttavia il codice è generalizzato per supportare superfici di qualsiasi grado.
+				<br />
+				Siccome lavoriamo sempre su un piano ed i punti di controllo sono fissati ed equidistanti su due assi, molte funzioni possono essere semplificate. I nostri input ed output sono sempre e solo l'altezza dei punti/vertici.
+				<br />
+				Abbiamo quindi una funzione che prende in input la matrice delle altezze dei punti di controllo e la risoluzione voluta, e manda in output una matrice di dimensioni pari alla risoluzione desiderata contenente le altezze dei vertici.
+			</p>
+			<pre><code>public static utils.Matrix&ltfloat> bezier_points(utils.Matrix&ltVector3> control_points, int resolution)
+	{
+	int degree = control_points.width - 1;
+
+	var ret = new utils.Matrix&ltfloat>(resolution, resolution, 0f);
+
+	for (int y = 0; y < resolution; y++)
+		{
+		for (int x = 0; x < resolution; x++)
+			{
+			float u = ((float)x) / (float)(resolution - 1);
+			float v = ((float)y) / (float)(resolution - 1);
+
+			ret[x, y] = bezier_point(control_points, u, v).y;
+			}
+		}
+	return ret;
+	}</code></pre>
+
+			<p>
+				L'altezza dei singoli punti viene quindi calcolata con la funzione bezier_point, che sfrutta l'algoritmo dei polinomi di Bernstein sopra descritto.
+			</p>
+			<pre><code>private static Vector3 bezier_point(utils.Matrix&ltVector3> control_points, float u, float v)
+	{
+	var ret = Vector3.zero;
+	var N_i = control_points.width - 1; 
+	var N_j = control_points.height - 1;
+
+	for (int i = 0; i < control_points.width; i++)
+		{
+		float bern1 = binomial(N_i, i) * Mathf.Pow(u, i) * Mathf.Pow((1 - u), (N_i - i));
+		for (int j = 0; j < control_points.height; j++)
+			{
+			float bern2 = binomial(N_j, j) * Mathf.Pow(v, j) * Mathf.Pow((1 - v), (N_j - j));
+
+			ret += bern1 * bern2 * control_points[i, j];
+			}
+		}
+	return ret;
+	}</code></pre>
+			<h3>Incollamenti</h3>
+			<p>
+				Anche per garantire la conformità alle condizioni di incollamento, l'aver fissato le coordinate dei punti di controllo su due assi, ha portato a semplificazioni nella struttura del codice.
+				<br />
+				Per motivi di gameplay, oltre a garantire la conformità alle condizioni di incollamento dei punti di controllo manipolati, dobbiamo anche garantire la coerenza dei valori minimi e massimi di altezza dei punti coinvolti in situazioni di incollamento.
+				<br />
+				Iniziamo con il presentare la funzione generica che si occupa di aggiornare tutti i valori coinvolti, a prescindere dalla natura del punto in analisi.
+				La funzione update_point viene chiamata quando un punto qualsiasi viene mosso.
+			</p>
+			<pre><code>public void update_point(float new_height)
+	{
+	float delta = update_height_mine(new_height);
+
+	update_height_pivot(delta); //performs actions only for pivots
+	update_height_glued(delta, gluing_conditions_recursions); //performs actions only for glued points
+	update_tiles();
+	}</code></pre>
+
+			<p>
+				Nella funzione update_height_mine aggiorniamo l'altezza del punto corrente. Al fine di limitare l'accumulazione di errori dovuti all'inaccuratezza delle operazioni in floating point, aggiorniamo il delta in maniera relativa alla posizione a inizio livello del punto, piuttosto che alla posizione attuale.
+				Questo è un dettaglio implementativo che non ha effetto sui calcoli seguenti.
+			</p>
+			<pre><code>private float update_height_mine(float new_height)
+	{
+	float old_height = height;
+	float delta = new_height - height;
+	height = new_height;
+
+	float old_delta_from_beg = Mathf.Abs(height_beg - old_height);
+	float new_delta_from_beg = Mathf.Abs(height_beg - new_height);
+
+	Level_manager.manager.update_terraforming_points(old_delta_from_beg, new_delta_from_beg);
+
+	return delta;
+	}</code></pre>
+
+			<h4>Pivot</h4>
+			<p>
+				A prescindere dal fatto che il nostro incollamento coinvolga 2 o 4 superfici, muovere il punto condiviso avrà sempre lo stesso effetto: tutti i punti incollati associati devono muoversi dello stesso valore nello stesso verso. Questo garantisce che le distanze relative tra i punti incollati e quello condiviso rimangano costanti.
+				Inoltre, le altezze massime e minime dei punti incollati non sono assolute, bensì relative al punto condiviso. Quindi muovere il punto condivisò cambierà anche altezze minime e massime dei punti incollati dello stesso delta.
+			</p>
+			<pre><code>private void update_height_pivot(float delta_y)
+	{
+	if (!am_pivot) { return; }
+
+	foreach (var cp in glued_to_me)
+		{
+		cp.height_beg += delta_y;
+		cp.height_min += delta_y;
+		cp.height_max += delta_y;
+
+		cp.moved_reference_update();
+
+		cp.update_line();
+		cp.update_height_pivot(delta_y / 2);
+		}
+	}
+</code></pre>
+
+			<h4>Punto condiviso tra due superfici</h4>
+			<p>
+				È necessario distinguere due situazioni di incollamento: la prima, quando un punto di controllo è condiviso tra due superfici adiacenti (ovvero si trova nel lato comune), e la seconda, quando un punto di controllo è condiviso tra quattro superfici adiacenti (ovvero si trova nell'angolo comune).
+				<br />
+				Per la prima situazione, abbiamo un punto condiviso C e due punti incollati A e B.
+				Dobbiamo far si che sia sempre vera la seguente condizione:
+				<br />
+				$A.y - C.y == C.y - B.y$
+				<br />
+				Ovvero il delta in altezza tra un punto incollato ed il punto condiviso, dev'essere opposto al delta in altezza tra l'altro punto incollato ed il punto condiviso.
+				Per garantire ciò, quando il giocatore muove un punto incollato, il movimento opposto viene applicato all'altro punto incollato.
+				<br />
+				Nella funzione update_height_glued, aggiorniamo l'altezza di eventuali punti incollati.
+				La nuova altezza del punto incollato al punto che stiamo muovendo (nel codice glue_other) sarà quindi l'altezza con delta opposto rispetto al punto condiviso (glue_pivot)
+			</p>
+			<pre><code>private void update_height_glued(float delta)
+	{
+	height = Mathf.Clamp(height, height_min, height_max);
+
+	if (am_glued)
+		{
+		var other_new_height = (0 - (height - glue_pivot.height)) + glue_pivot.height;
+
+		float other_delta = other_new_height - glue_other.height;
+		glue_other.update_height_mine(other_new_height);
+
+		glue_other.update_tiles();
+
+		glue_other.update_height_pivot(other_delta);
+		glue_other.update_height_glued(delta);
+		}
+
+	update_line();
+	}</code></pre>
+
+			<h4>Punto condiviso tra quattro superfici</h4>
+			<p>
+				Per la seconda situazione le cose si fanno più complicate.
+			</p>
+			<img class="centered" src="Images/Gluing_pain.png" />
+			<p>
+				Abbiamo un punto Z condiviso tra quattro superfici (1, 2, 3, 4), che fa da pivot per 4 punti incollati A opposto a C e B opposto a D.
+				<br />
+				Questi punti sono a loro volta ciascuno condiviso tra due superfici, per cui hanno una loro coppia di punti incollati. Ciascuno di questi punti ha tuttavia due diversi pivot in due assi diversi.
+				<br />
+				Il codice prima proposto si occupa già di gestire sia lo spostamento di Z (spostando A, B, C e D dello stesso delta, che a loro volta spostano F, G, H ed E), sia lo spostamento di A, B, C e D, che muovono il punto loro opposto, ed in quanto pivot alzano/abbassano la coppia di punti a loro associati.
+				Tuttavia F, G, H ed E avendo ciascuno due punti incollati, porterebbero ad una ricorsione infinita se cercassimo di aggiornare i punti adiacenti a quello mosso. Sappiamo però che quando questo si verifica sono sempre 4 i punti coinvolti.
+				<br />
+				La soluzione quindi è stata di memorizzare per ogni punto incollato solo uno dei suoi opposti (in senso orario, scelta completamente arbitraria). Durante la generazione dei punti di controllo, ai punti viene anche dato un valore di "ricorsione" pari a 1 per i punti soggetti ad incollamento "a due" e 4 per i punti soggetti ad incollamento "a quattro". Quel valore viene utilizzato nella prima delle chiamate di aggiornamento, e quando update_height_glued è chiamata ricorsivamente, viene decrementato ad ogni chiamata.
+				<br />
+				Perciò, muovere F di un delta <b><i>x</i></b>, muoverà G di <b><i>-x</i></b>, che a sua volta muoverà H di <b><i>-(-x)</i></b>, che a sua volta muoverà E di <b><i>-(-(-x))</i></b>. Arrivati ad aggiornare E, recursion sarà sceso a 0, e tutti i punti saranno stati aggiornati.
+			</p>
+			<pre><code>private void update_height_glued(float delta, int recursion)
+	{
+	height = Mathf.Clamp(height, height_min, height_max);
+
+	if (am_glued && recursion > 0)
+		{
+		var other_new_height = (0 - (height - glue_pivot.height)) + glue_pivot.height;
+
+		float other_delta = other_new_height - glue_other.height;
+		glue_other.update_height_mine(other_new_height);
+
+		glue_other.update_tiles();
+
+		glue_other.update_height_pivot(other_delta);
+		glue_other.update_height_glued(delta, recursion - 1);
+		}
+
+	update_line();
+	}</code></pre>
+		</div>
+	</div>
+</body>
+</html>
